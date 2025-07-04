@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3I/ATLAS - From Beyond the Known</title>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#8c52ff',secondary:'#ff6b2b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Space Grotesk', sans-serif;
+background-color: #070b1a;
+overflow-x: hidden;
+}
+.space-bg {
+background: linear-gradient(to bottom, #070b1a, #0f1a3a);
+position: relative;
+overflow: hidden;
+}
+.star {
+position: absolute;
+width: 2px;
+height: 2px;
+background-color: white;
+border-radius: 50%;
+opacity: 0;
+animation: twinkle 5s infinite;
+}
+@keyframes twinkle {
+0% { opacity: 0; }
+50% { opacity: 1; }
+100% { opacity: 0; }
+}
+.meteor-container {
+position: relative;
+width: 300px;
+height: 300px;
+margin: 0 auto;
+transform-origin: center;
+}
+.meteor {
+width: 100%;
+height: 100%;
+position: relative;
+animation: pulse 3s infinite alternate;
+}
+@keyframes pulse {
+0% { transform: scale(1); filter: brightness(1); }
+100% { transform: scale(1.05); filter: brightness(1.2); }
+}
+.meteor-trail {
+position: absolute;
+width: 150px;
+height: 5px;
+background: linear-gradient(90deg, rgba(255,107,43,0), rgba(255,107,43,0.8));
+border-radius: 50%;
+opacity: 0;
+transform: rotate(45deg);
+filter: blur(2px);
+animation: trail 2s infinite;
+}
+@keyframes trail {
+0% { opacity: 0; transform: translateX(-100px) translateY(-100px) rotate(45deg); }
+30% { opacity: 0.8; }
+100% { opacity: 0; transform: translateX(100px) translateY(100px) rotate(45deg); }
+}
+.glow {
+position: absolute;
+width: 100%;
+height: 100%;
+background: radial-gradient(circle, rgba(255,107,43,0.3) 0%, rgba(255,107,43,0) 70%);
+border-radius: 50%;
+animation: glow 4s infinite alternate;
+}
+@keyframes glow {
+0% { opacity: 0.5; transform: scale(1.2); }
+100% { opacity: 0.8; transform: scale(1.5); }
+}
+.btn {
+position: relative;
+overflow: hidden;
+transition: all 0.3s ease;
+}
+.btn::before {
+content: '';
+position: absolute;
+top: -50%;
+left: -50%;
+width: 200%;
+height: 200%;
+background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+transform: scale(0);
+transition: transform 0.5s ease-out;
+border-radius: 50%;
+z-index: -1;
+}
+.btn:hover::before {
+transform: scale(1);
+}
+.btn:hover {
+transform: translateY(-3px);
+box-shadow: 0 10px 20px rgba(140, 82, 255, 0.3);
+}
+.contract-box {
+background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.1);
+transition: all 0.3s ease;
+}
+.contract-box:hover {
+background: rgba(255, 255, 255, 0.08);
+border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.copy-btn {
+transition: all 0.3s ease;
+}
+.copy-btn:hover {
+background-color: rgba(255, 255, 255, 0.1);
+}
+.expand-btn {
+transition: all 0.3s ease;
+}
+.story-container {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.5s ease;
+}
+.story-container.expanded {
+max-height: 2000px;
+}
+.rotate-icon {
+transition: transform 0.3s ease;
+}
+.rotate-icon.rotated {
+transform: rotate(180deg);
+}
+</style>
+</head>
+<body>
+<div class="space-bg min-h-screen flex flex-col items-center justify-center px-4 py-16 relative">
+<!-- Stars -->
+<div id="stars-container"></div>
+<!-- Meteor Logo -->
+<div class="meteor-container mb-8">
+<div class="glow"></div>
+<img src="https://static.readdy.ai/image/7a7bb11a4d8d55ccac0285af3f362497/202e77f171e587a9700e76d788a76c37.png" alt="3I/ATLAS Meteor" class="meteor">
+<div class="meteor-trail"></div>
+</div>
+<!-- Main Content -->
+<div class="text-center max-w-4xl mx-auto">
+<h1 class="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">From Beyond the Known</h1>
+<p class="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed">
+In 2014, a meteor named 3I/ATLAS became the first confirmed interstellar object to hit Earth, traveling billions of kilometers through the cold dark of space before crashing into the Pacific Ocean.
+</p>
+<p class="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed">
+It wasn't just a rock. It was a message from the cosmos.
+</p>
+<p class="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed">
+October 2025, it will pass us by, but this time, we will be ready.
+</p>
+<p class="text-lg md:text-xl text-gray-300 mb-10 leading-relaxed">
+From the stars to your wallet. From cosmic dust to decentralized freedom.
+</p>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+<a href="https://axiom.trade/meme/8CpGk7LfRxwqeQfVuBfsRB92J4dCAPo9KhxW1BFMum2c" target="_blank" class="btn !rounded-button bg-primary text-white font-semibold py-4 px-8 text-lg whitespace-nowrap flex items-center justify-center">
+<span class="w-6 h-6 flex items-center justify-center mr-2">
+<i class="ri-shopping-cart-line ri-lg"></i>
+</span>
+Buy on Axiom
+</a>
+<a href="https://x.com/3I_ATLAS" target="_blank" class="btn !rounded-button bg-transparent border-2 border-secondary text-secondary font-semibold py-4 px-8 text-lg whitespace-nowrap flex items-center justify-center">
+<span class="w-6 h-6 flex items-center justify-center mr-2">
+<i class="ri-twitter-x-line ri-lg"></i>
+</span>
+Join on Twitter
+</a>
+</div>
+<!-- Contract Box -->
+<div class="contract-box !rounded-lg p-4 mb-12 max-w-2xl mx-auto">
+<div class="flex flex-col sm:flex-row items-center justify-between">
+<div class="text-gray-400 text-sm mb-2 sm:mb-0">Smart Contract:</div>
+<div class="flex items-center w-full sm:w-auto">
+<div class="text-white text-sm truncate max-w-xs sm:max-w-md" id="contract-address">8CpGk7LfRxwqeQfVuBfsRB92J4dCAPo9KhxW1BFMum2c</div>
+<button id="copy-btn" class="copy-btn ml-2 p-2 !rounded-button">
+<span class="w-5 h-5 flex items-center justify-center text-gray-400">
+<i class="ri-file-copy-line"></i>
+</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Expandable Story Section -->
+<div class="mb-8 flex flex-col items-center">
+<button id="expand-btn" class="expand-btn flex items-center justify-center text-primary font-medium">
+<span>Read the Full Story</span>
+<span class="w-5 h-5 flex items-center justify-center ml-2 rotate-icon" id="rotate-icon">
+<i class="ri-arrow-down-s-line"></i>
+</span>
+</button>
+<div class="story-container mt-6 w-full max-w-2xl" id="story-container">
+<div class="contract-box !rounded-lg p-8">
+<div class="text-gray-300 space-y-4">
+<p>
+This meteor had been wandering the galaxy for millions of years, carrying unknown elements, untouched by our Sun, and older than our solar system itself. It moved faster than anything we could launch, burning brighter than our rockets ever will, before finally joining Earth's oceans—reminding us how small, yet how connected, we truly are to the universe.
+</p>
+<p>
+And the story isn't over.
+</p>
+<p>
+The parent body of 3I/ATLAS will pass closest to Earth on October 20, 2025, a once-in-a-lifetime cosmic event as it sails past our planet, a silent witness to our struggles, dreams, and blockchain experiments.
+</p>
+<p>
+Now, its spirit lives on, encoded on-chain.
+</p>
+<p>
+3I/ATLAS Meme Coin is born from the story of this interstellar traveler—an unstoppable wanderer crossing the void, breaking through Earth's atmosphere, leaving a crater of wonder, and reminding us that greatness comes from beyond the known.
+</p>
+<p>
+From the stars to your wallet. From cosmic dust to decentralized freedom. From a meteor's fiery descent to the unstoppable rise of a community.
+</p>
+<p>
+We aren't just going to the moon. We're from beyond it.
+</p>
+<p>
+The time is near. The cosmos beckons. Our journey continues.
+</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="text-gray-500 text-sm">
+<p>© 2025 3I/ATLAS. From the cosmos to the blockchain.</p>
+</div>
+</div>
+</div>
+<!-- Scripts -->
+<script id="stars-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const starsContainer = document.getElementById('stars-container');
+const numStars = 200;
+for (let i = 0; i < numStars; i++) {
+const star = document.createElement('div');
+star.classList.add('star');
+// Random position
+star.style.left = `${Math.random() * 100}%`;
+star.style.top = `${Math.random() * 100}%`;
+// Random size
+const size = Math.random() * 3;
+star.style.width = `${size}px`;
+star.style.height = `${size}px`;
+// Random twinkle delay
+star.style.animationDelay = `${Math.random() * 5}s`;
+starsContainer.appendChild(star);
+}
+});
+</script>
+<script id="meteor-animation">
+document.addEventListener('DOMContentLoaded', function() {
+const meteorContainer = document.querySelector('.meteor-container');
+// Create meteor trails at random intervals
+setInterval(() => {
+const trail = document.createElement('div');
+trail.classList.add('meteor-trail');
+// Random position and angle
+const angle = Math.random() * 90 - 45;
+trail.style.transform = `rotate(${45 + angle}deg)`;
+trail.style.left = `${Math.random() * 100}%`;
+trail.style.top = `${Math.random() * 100}%`;
+meteorContainer.appendChild(trail);
+// Remove trail after animation completes
+setTimeout(() => {
+trail.remove();
+}, 2000);
+}, 500);
+});
+</script>
+<script id="interaction-handlers">
+document.addEventListener('DOMContentLoaded', function() {
+// Copy contract address
+const copyBtn = document.getElementById('copy-btn');
+const contractAddress = document.getElementById('contract-address');
+copyBtn.addEventListener('click', function() {
+navigator.clipboard.writeText(contractAddress.textContent).then(() => {
+const originalIcon = copyBtn.querySelector('i').className;
+copyBtn.querySelector('i').className = 'ri-check-line';
+setTimeout(() => {
+copyBtn.querySelector('i').className = originalIcon;
+}, 2000);
+});
+});
+// Expand story section
+const expandBtn = document.getElementById('expand-btn');
+const storyContainer = document.getElementById('story-container');
+const rotateIcon = document.getElementById('rotate-icon');
+expandBtn.addEventListener('click', function() {
+storyContainer.classList.toggle('expanded');
+rotateIcon.classList.toggle('rotated');
+if (storyContainer.classList.contains('expanded')) {
+expandBtn.querySelector('span:first-child').textContent = 'Hide the Full Story';
+} else {
+expandBtn.querySelector('span:first-child').textContent = 'Read the Full Story';
+}
+});
+// Cursor effect
+document.addEventListener('mousemove', function(e) {
+const x = e.clientX;
+const y = e.clientY;
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(button => {
+const rect = button.getBoundingClientRect();
+const buttonX = rect.left + rect.width / 2;
+const buttonY = rect.top + rect.height / 2;
+const distance = Math.sqrt(Math.pow(x - buttonX, 2) + Math.pow(y - buttonY, 2));
+if (distance < 150) {
+const scale = 1 - distance / 150;
+button.style.transform = `translateY(-${scale * 5}px)`;
+button.style.boxShadow = `0 ${10 + scale * 10}px ${20 + scale * 10}px rgba(140, 82, 255, ${0.3 + scale * 0.2})`;
+} else {
+button.style.transform = '';
+button.style.boxShadow = '';
+}
+});
+});
+});
+</script>
+</body>
+</html>
